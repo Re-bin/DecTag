@@ -4,16 +4,6 @@ import torch.nn.functional as F
 import numpy as np
 import random
 
-random_seed = 1
-torch.manual_seed(random_seed)
-torch.cuda.manual_seed(random_seed)
-np.random.seed(random_seed)
-random.seed(random_seed)
-torch.cuda.manual_seed_all(random_seed)
-torch.backends.cudnn.benchmark = False
-torch.backends.cudnn.deterministic = True
-
-
 class DecTag_NFM(nn.Module):
     def __init__(self, tag_num, confounders, num_layers, dropout, category_num=2, item_factor_num=1024, factor_num=64):
         super(DecTag_NFM, self).__init__()
