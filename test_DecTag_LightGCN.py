@@ -113,6 +113,12 @@ for i in range(len(args.splits)):
 
     ######## SAVING RESULT ########
     now_time = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime())
+    if os.exist('results') == False:
+        os.mkdir('results')
+    if os.exist('results/{}'.format(data_set)) == False:
+        os.mkdir('results/{}'.format(data_set))
+    if os.exist('results/{}/LightGCN/split_{}'.format(data_set, split_index)) == False:
+        os.mkdir('results/{}/LightGCN/split_{}'.format(data_set, split_index))
     result_df.to_csv('results/{}/LightGCN/split_{}/test_result_{}.csv'.format(data_set, split_index, now_time), sep=',', header=True, index=False)
 
     for j in range(len(topks)):

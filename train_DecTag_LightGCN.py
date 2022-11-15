@@ -202,4 +202,10 @@ for split_index in args.splits:
                 best_state_dict = emodel.state_dict()
 
     # SAVE MODEL
+    if os.exist('check_point') == False:
+        os.mkdir('check_point')
+    if os.exist('check_point/{}'.format(data_set)) == False:
+        os.mkdir('check_point/{}'.format(data_set))
+    if os.exist('check_point/{}/LightGCN/split_{}'.format(data_set, split_index)) == False:
+        os.mkdir('check_point/{}/LightGCN/split_{}'.format(data_set, split_index))
     torch.save(best_state_dict, 'check_point/{}/LightGCN/split_{}/{:03d}-{:.5f}.pth'.format(data_set, split_index, best_valid_epoch, best_valid_recall))
