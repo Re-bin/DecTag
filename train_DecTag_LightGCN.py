@@ -67,16 +67,7 @@ def BPR_train_one_epoch(dataset, model, optimizer, epoch, split_index, batch_siz
     print("----" * 18)
     print("Split{} End Epoch {:03d} loss {:05f} ".format(split_index, epoch, aver_loss) + "costs " + time.strftime(
         "%H: %M: %S", time.gmtime(time.time() - start_time)))
-
-
-random_seed = 1
-torch.manual_seed(random_seed)
-torch.cuda.manual_seed(random_seed)
-np.random.seed(random_seed)
-random.seed(random_seed)
-torch.cuda.manual_seed_all(random_seed)
-torch.backends.cudnn.benchmark = False
-torch.backends.cudnn.deterministic = True
+        
 
 ######## ARGS ########
 parser = argparse.ArgumentParser()
@@ -100,6 +91,11 @@ parser.add_argument("--warmup_lr",
                     default=0.0001,
                     help="learning rate in burn-in phase")
 
+parser.add_argument("--seed",
+                    type=int,
+                    default=1,
+                    help="random seed")
+
 parser.add_argument("--lr",
                     type=float,
                     default=0.001,
@@ -119,8 +115,16 @@ os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 print("splits:{}".format(args.splits))
 print("Dataset:{}".format(args.dataset))
 print("Device id:{}".format(args.gpu))
-torch.backends.cudnn.deterministic = True
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+random_seed = args.seed
+torch.manual_seed(random_seed)
+torch.cuda.manual_seed(random_seed)
+np.random.seed(random_seed)
+random.seed(random_seed)
+torch.cuda.manual_seed_all(random_seed)
+torch.backends.cudnn.benchmark = False
+torch.backends.cudnn.deterministic = True
 
 ######## PREPARE DATASET ########
 start_time = time.time()

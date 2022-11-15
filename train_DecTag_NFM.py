@@ -14,15 +14,6 @@ import model
 import data_util
 import evaluate_NFM
 
-random_seed = 1
-torch.manual_seed(random_seed)
-torch.cuda.manual_seed(random_seed)
-np.random.seed(random_seed)
-random.seed(random_seed)
-torch.cuda.manual_seed_all(random_seed)
-torch.backends.cudnn.benchmark = False
-torch.backends.cudnn.deterministic = True
-
 ######## ARGS ########
 parser = argparse.ArgumentParser()
 
@@ -45,6 +36,11 @@ parser.add_argument("--warmup_lr",
                     default=0.0001,
                     help="learning rate in burn-in phase")
 
+parser.add_argument("--seed",
+                    type=int,
+                    default=1,
+                    help="random seed")
+
 parser.add_argument("--lr",
                     type=float,
                     default=0.001,
@@ -58,8 +54,16 @@ parser.add_argument("--epochs",
 args = parser.parse_args()
 args.splits = args.splits.split(',')
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
-torch.backends.cudnn.deterministic = True
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+random_seed = args.seed
+torch.manual_seed(random_seed)
+torch.cuda.manual_seed(random_seed)
+np.random.seed(random_seed)
+random.seed(random_seed)
+torch.cuda.manual_seed_all(random_seed)
+torch.backends.cudnn.benchmark = False
+torch.backends.cudnn.deterministic = True
 
 
 def train(data_set, split_index):
