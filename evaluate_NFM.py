@@ -56,7 +56,7 @@ def test_one_batch(X, topks):
             'ndcg': np.array(ndcg)}
 
 
-def get_metrics(model, item_tags, train_item_tags, video_features, itemid_videohiddenid_map, tag_num, topks, split_index, batch_size=10240):
+def get_metrics(model, item_tags, video_features, itemid_videohiddenid_map, tag_num, topks, split_index, batch_size=10240):
     items = list(item_tags.keys())
     result_matrix = np.zeros(shape=(len(items), tag_num))
     steps = int(len(items) // batch_size + 1)
