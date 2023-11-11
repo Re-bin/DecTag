@@ -7,7 +7,7 @@
 
 ## Environment
 
-The codes are written in Python 3.7.12. with the following dependencies.
+The codes are written in Python 3.7.12. with the following dependencies:
 
 - numpy == 1.21.2
 - pytorch == 1.8.0 (GPU version)
