@@ -40,4 +40,4 @@ For preparation, create a data_split folder and unzip the sub-dataset into the f
 
  **For advanced usage of arguments, run the code with --help argument.**
 
-**Thanks for your interest in our work**
+**Thanks for your interest in our work.**
