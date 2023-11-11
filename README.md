@@ -18,7 +18,7 @@ The codes are written in Python 3.7.12. with the following dependencies:
 
 The original YouTube-8M dataset can be accessed [here](https://research.google.com/youtube8m/download.html).
 
-For preparation, create a data_split folder.
+For preparation, please create a data_split folder.
 
 ## Examples to run the codes
 
